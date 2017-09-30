@@ -51,7 +51,9 @@ results.10.user._id
 ```
 となる．
 
-results.10.user._id
+長いJSONレスポンスには色々と面白いものもあるので，是非他のものにも活用したい．
+
+Online JSON viewer http://jsonviewer.stack.hu/
 
 2. 女の子にLikeを送る
 ```
