@@ -21,7 +21,9 @@ HttpRequestを解析した結果，Facebook認証後に api.gotinder.com のAPI�
 
 1. 女の子のダウンロード
 下記APIを叩けば，女の子は11人まとめてバッチでダウンロードされる
+```
 https://api.gotinder.com/recs/core?locale=ja
+```
 
 これにより下記のJSON Responceを得る
 ```
@@ -52,7 +54,9 @@ results.10.user._id
 results.10.user._id
 
 2. 女の子にLikeを送る
+```
 https://api.gotinder.com/like/(_id)?locale=ja
+```
 に対してGETリクエストを繰り返せば良い．
 
 課題
