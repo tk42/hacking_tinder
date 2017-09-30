@@ -12,10 +12,11 @@ Facebook連動しており，Facebookユーザーでないと参加できない
 
 iPhoneアプリではLikeは右スワイプになるが，これがなかなか面倒
 
-そこでWeb版Tinderをハックして，自動でLikeを送り続けるようにするスクリプトを開発する
-https://tinder.com/
+そこでWeb版Tinder https://tinder.com/ をハックして，自動でLikeを送り続けるようにするスクリプトを開発する
 
-====
+
+-------
+
 HttpRequestを解析した結果，Facebook認証後に api.gotinder.com のAPIにGETリクエストを投げればLikeが送れることがわかった．
 
 1. 女の子のダウンロード
@@ -23,7 +24,7 @@ HttpRequestを解析した結果，Facebook認証後に api.gotinder.com のAPI�
 https://api.gotinder.com/recs/core?locale=ja
 
 これにより下記のJSON Responceを得る
-"""
+```
 {"status":200,"results":[
 {"type":"user","group_matched":false,"user":
  _id:
@@ -38,14 +39,14 @@ https://api.gotinder.com/recs/core?locale=ja
  ...
 },
 ]
-"""
+```
 つまり，送るべきユーザIDは
-"""
+```
 results.0.user._id
 results.1.user._id
 ...
 results.10.user._id
-"""
+```
 となる．
 
 results.10.user._id
