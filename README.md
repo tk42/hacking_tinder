@@ -19,6 +19,12 @@ iPhoneアプリではLikeは右スワイプになるが，これがなかなか�
 
 HttpRequestを解析した結果，Facebook認証後に api.gotinder.com のAPIにGETリクエストを投げればLikeが送れることがわかった．
 
+0. X-Auth-Token を取得する
+パケットキャプチャなどして，https://api.gotinder.com/v2/profile に向かうGETリクエストヘッダを覗き見て x-auth-token を取得しておく
+```
+python hacking_tinder.py (x-auth-token)
+```
+
 1. 女の子のダウンロード
 下記APIを叩けば，女の子は11人まとめてバッチでダウンロードされる
 ```
@@ -62,4 +68,4 @@ https://api.gotinder.com/like/(_id)?locale=ja
 に対してGETリクエストを繰り返せば良い．
 
 課題
-- [ ] Facebook 認証のパス
+- [ ] X-Auth-Token のキャプチャをユーザフレンドリーに行う
