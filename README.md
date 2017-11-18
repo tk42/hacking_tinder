@@ -12,4 +12,20 @@ Facebook連動しており，Facebookユーザーでないと参加できない
 
 iPhoneアプリではLikeは右スワイプになるが，これがなかなか面倒
 
-そこでWeb版Tinder https://tinder.com/ をハックして，自動でLikeを送り続けるようにするスクリプトを開発する
+そこで，自動でLikeを送り続けるようにするスクリプトを開発する
+
+また，Face++のbeauty coreを利用して，美人スコアが高い人だけにライクを送る
+
+https://www.faceplusplus.com/beauty/
+
+
+Getting started
+==========
+
+1. rename setenv.sh.example and register your facebook token, face api key and face api secret key.
+
+2. enjoy!
+
+```
+./hacking_tinder.py
+```
