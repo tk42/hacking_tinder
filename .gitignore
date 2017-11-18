@@ -102,6 +102,6 @@ ENV/
 
 .bash_history
 
-.scapy_history
-
 .idea/workspace.xml
+
+setenv.sh
