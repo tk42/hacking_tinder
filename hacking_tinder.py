@@ -1,8 +1,7 @@
 # -*- coding:utf-8 -*-
-import sys
-import time
 import json
 import asyncio
+from scapy.all import *
 import requests
 from munch import Munch
 
@@ -10,9 +9,38 @@ USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36
 RECS_URL = "https://api.gotinder.com/recs/core?locale=ja"
 
 
-class HackingTinder():
+class SuiffingPacket:
+    loop = asyncio.get_event_loop()
+    buff_size = 2048
+
+    def __init__(self):
+        self.conn = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_TCP)
+        self.sniff()
+        self.loop.run_forever()
+
+    def sniff(self):
+        # pkt = self.conn.recv(self.buff_size)
+        # hexvalue = binascii.hexlify(pkt).decode()
+        # print([hexvalue[i:i + 2] for i in range(0, len(hexvalue), 2)])
+        sniff(filter="tcp and port 80", prn=self.packet_callback, store=0)
+        self.loop.call_later(0.1, self.sniff)
+
+    def packet_callback(self, packet):
+        http_packet=str(packet)
+        if http_packet.find('GET'):
+            return self.get_print(packet)
+
+    def get_print(self, packet1):
+        ret = "*****GET PACKET*****\n"
+        ret += "\n".join(packet1.sprintf("{Raw:%Raw.load%}\n").split(r"\r\n"))
+        ret += "********************\n"
+        return ret
+
+
+class HackingTinder:
     headers = None
     loop = asyncio.get_event_loop()
+    counter = 0
 
     def __init__(self, token):
         self.headers = {
@@ -27,20 +55,30 @@ class HackingTinder():
 
         for person in persons:
             # self.print_person_info(person)
-            id = person._id
-            like_json = requests.get(self.make_like_url(id), headers=self.headers)
-            print("SENT LIKE TO HER (" + id + ") : " + like_json.text)
+            like_json = requests.get(self.make_like_url(person._id), headers=self.headers)
+            res = json.loads((like_json.text))
+            if "status" in res and res["status"] == 401:
+                raise RuntimeError(
+                    "Something is wrong. It might be because make_like_url() is failed with the expire X-Auth-Token."
+                )
+            print("#" + str(self.counter) + ": SENT LIKE TO HER (" + person._id + ") : " + like_json.text)
+            self.counter += 1
             time.sleep(0.1)
 
         self.loop.call_soon(self.logic)
 
     def get_recs(self):
         result = []
-        recs_json = requests.get(RECS_URL, headers=self.headers)
-        recs = Munch(json.loads(recs_json.text))
-        for rec in recs.results:
-            result.append(Munch(rec))
-        return result
+        try:
+            recs_json = requests.get(RECS_URL, headers=self.headers)
+            recs = Munch(json.loads(recs_json.text))
+            for rec in recs.results:
+                result.append(Munch(rec))
+            return result
+        except:
+            raise RuntimeError(
+                "Something is wrong. It might be because make_like_url() is failed with the expire X-Auth-Token."
+            )
 
     def print_person_info(self, person):
         """
@@ -70,8 +108,9 @@ class HackingTinder():
         return "https://api.gotinder.com/like/" + id + "?locale=ja"
 
 if __name__ == '__main__':
-    try:
-        token = str(sys.argv[1])
-        ht = HackingTinder(token)
-    except IndexError:
-        print("X-Auth-Token IS EMPTY.")
+    SuiffingPacket()
+    # try:
+    #     token = str(sys.argv[1])
+    #     ht = HackingTinder(token)
+    # except IndexError:
+    #     print("X-Auth-Token IS EMPTY.")
