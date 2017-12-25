@@ -34,9 +34,23 @@ After setting those,
 2. enjoy!
 
 ```
-python3 ./hacking_tinder.py ${FACEBOOK_AUTH_TOKEN} ${FACEPP_API_KEY} ${FACEPP_API_SECRETKEY}
+./hacking_tinder.sh
 ```
 
+### Trouble shooting
+```
+Some error was caught : 'ascii' codec can't encode characters in position 12-13: ordinal not in range(128)
+```
+みたいなのがでる場合，
+```
+echo $LANG
+echo $LC_ALL
+```
+をチェックすること．だいたい次を設定すれば良い．
+```
+export LANG='ja_JP.UTF-8'
+export LC_ALL='ja_JP.UTF-8'
+```
 
 To Small Bussiness
 =====
