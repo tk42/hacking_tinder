@@ -15,6 +15,11 @@ class HackingTinder:
         self.beauty_score = BeautyScore(facepp_api_key, facepp_api_secretkey)
 
         self.session = pynder.Session(facebook_token=facebook_auth_token)
+        print("Authentification is succeeded. Check LANG in environment variables.")
+       
+        print(sys.getdefaultencoding())
+        print(sys.stdout.encoding)
+
         self.session.matches() # get users you have already been matched with
 
         # self.session.update_location(LAT, LON)  # updates latitude and longitude for your profile
