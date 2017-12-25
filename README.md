@@ -24,7 +24,7 @@ Getting started
 
 1. rename setenv.sh.example and register your facebook token, face api key and face api secret key.
 
-You can see how to get the facebook token [tinder-api-documentation.md](https://gist.github.com/rtt/10403467)
+You can see how to get the facebook token [Tinderface](https://tinderface.herokuapp.com/) の導入をよく読む
 
 After setting those,
 ```
@@ -36,3 +36,8 @@ After setting those,
 ```
 python3 ./hacking_tinder.py ${FACEBOOK_AUTH_TOKEN} ${FACEPP_API_KEY} ${FACEPP_API_SECRETKEY}
 ```
+
+
+To Small Bussiness
+=====
+[Tinderface](https://tinderface.herokuapp.com/)みたいなヤツ
