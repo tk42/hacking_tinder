@@ -14,9 +14,7 @@ iPhoneアプリではLikeは右スワイプになるが，これがなかなか�
 
 そこで，自動でLikeを送り続けるようにするスクリプトを開発する
 
-また，Face++のbeauty coreを利用して，[美人スコア](https://www.faceplusplus.com/beauty/)(定義のページが削除されている…)が高い人だけにライクを送る
-
-https://www.faceplusplus.com/beauty/
+また，Face++のbeauty scoreを利用して，[美人スコア](https://www.faceplusplus.com/beauty/)(定義のページが削除されている…)が高い人だけにライクを送る
 
 
 Getting started
@@ -64,4 +62,4 @@ export LC_ALL='ja_JP.UTF-8'
 
 Future work
 =====
-[Tinderface](https://tinderface.herokuapp.com/)
+Beyond [Tinderface](https://tinderface.herokuapp.com/)
