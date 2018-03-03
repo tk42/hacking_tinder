@@ -104,4 +104,6 @@ ENV/
 
 .idea/workspace.xml
 
+hacking_tinder.egg-info
+
 setenv.sh
