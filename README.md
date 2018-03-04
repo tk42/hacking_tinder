@@ -20,14 +20,7 @@ iPhoneアプリではLikeは右スワイプになるが，これがなかなか�
 Getting started
 ==========
 
-1. rename setenv.sh.example to setenv.sh and register your facebook token, face api key and face api secret key.
-
-How to get your facebook token? Read 'Get Started' on [Tinderface](https://tinderface.herokuapp.com/), then you can see 'access_token' in the response.
-
-After setting those,
-```
-. ./setenv.sh
-```
+1. register your facebook email, facebook password, face api key and face api secret key, and then rename setenv.sh.example to setenv.sh.
 
 2. install
 ```
@@ -39,7 +32,7 @@ make build
 make run
 ```
 
-4. develop
+4. run tests for developpers
 ```
 make test
 ```
