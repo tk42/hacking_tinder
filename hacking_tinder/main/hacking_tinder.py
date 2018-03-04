@@ -4,6 +4,7 @@ import io
 import sys
 import configparser
 import pynder
+from access_token import AccessToken
 from beauty_score import BeautyScore
 
 
@@ -12,10 +13,10 @@ class HackingTinder:
     loop = asyncio.get_event_loop()
     count = 0
 
-    def __init__(self, facebook_auth_token, facepp_api_key, facepp_api_secretkey):
+    def __init__(self, facebook_auth_token, beauty_score):
         # Authentification
         print("Starting the authentification.")
-        self.beauty_score = BeautyScore(facepp_api_key, facepp_api_secretkey)
+        self.beauty_score = beauty_score
         self.session = pynder.Session(facebook_token=facebook_auth_token)
         print("Authentification is succeeded.")
 
@@ -85,6 +86,9 @@ def test_utf8():
 
 if __name__ == '__main__':
     # test_utf8()
-    facebook_auth_token, facepp_api_key, facepp_api_secretkey = sys.argv[1:4]
-    ht = HackingTinder(facebook_auth_token, facepp_api_key, facepp_api_secretkey)
+    fb_email, fb_password = sys.argv[1:3]
+    facebook_auth_token = AccessToken(fb_email, fb_password).access_token
+    facepp_api_key, facepp_api_secretkey = sys.argv[3:5]
+    beauty_score = BeautyScore(facepp_api_key, facepp_api_secretkey)
+    ht = HackingTinder(facebook_auth_token, beauty_score)
     ht.start()
