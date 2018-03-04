@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+export FACEBOOK_EMAIL=
+export FACEBOOK_PASS=
 export FACEBOOK_AUTH_TOKEN=
 export FACEPP_API_KEY=
 export FACEPP_API_SECRETKEY=
