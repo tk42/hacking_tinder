@@ -26,12 +26,12 @@ class TestBeautyScore(unittest.TestCase):
     def test_fail_not_human(self):
         url = "http://images.gotinder.com/58b172266c7a43304d5b471c/53dc0555-fe7d-4063-81bc-50d2da792e65.jpg"
         result = self.bs.detect(url)
-        self.assertIsNone(result)
+        self.assertEqual({"ethnicity": None, "score": 0, "url": None}, result)
 
     def test_fail_behind(self):
         url = "http://images.gotinder.com/59959b5403af1ed72d299cc6/1080x1080_54ac66d6-c983-464d-8ceb-b50a840dc507.jpg"
         result = self.bs.detect(url)
-        self.assertIsNone(result)
+        self.assertEqual({"ethnicity": None, "score": 0, "url": None}, result)
 
 
 if __name__ == '__main__':

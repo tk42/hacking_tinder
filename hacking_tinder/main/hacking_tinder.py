@@ -40,8 +40,7 @@ class HackingTinder:
         try:
             self.config = configparser.ConfigParser()
             self.config.read('./hacking_tinder/resources/config.ini')
-            self.score_threshold = {ethnicity: float(self.config["SCORE_THRESHOLD"][ethnicity])
-                                    for ethnicity in self.config["SCORE_THRESHOLD"]}
+            self.score_threshold = self.config["SCORE_THRESHOLD"]
         except Exception as e:
             print("Failed to read config. details : %s" % str(e))
             sys.exit(1)
@@ -54,7 +53,7 @@ class HackingTinder:
     def logic(self):
         self.logic_impl()
         self.count += 1
-        self.loop.call_later(1, self.logic)
+        self.loop.call_later(2, self.logic)
 
     def logic_impl(self):
         try:
@@ -68,15 +67,10 @@ class HackingTinder:
             print("user.name : " + user.name)
             print("user.school : " + str(user.schools))
             print("user.bio : \n" + str(user.bio))
-            face_score = self.face_score(user.photos)
-            print("face_score : " + str(face_score))
             if user.instagram_username is not None:
                 print("instagram_username : https://www.instagram.com/" + str(user.instagram_username))
-            if face_score is not None:
-                if ((face_score["ethnicity"] == "Asian" and face_score["score"] > self.score_threshold["asian"])
-                   or (face_score["ethnicity"] == "White" and face_score["score"] > self.score_threshold["white"])):
-                    print("SENT LIKE TO HER")
-                    user.like()
+            user.like()
+            print("SENT LIKE TO HER")
         except Exception as e:
             print("Failed to get the user details : " + str(e))
 
