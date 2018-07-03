@@ -38,11 +38,12 @@ class BeautyScore:
                         "score": attributes["beauty"]["female_score"],
                         "url": image_url}
             except (KeyError, IndexError) as e:
-                # print(content) # debug
-                return None
+                print(content) # debug
+                return {"ethnicity": None, "score": 0, "url": None}
 
         except requests.HTTPError as e:
             print(str(e))
+            return {"ethnicity": None, "score": 0, "url": None}
 
 
 if __name__ == '__main__':
