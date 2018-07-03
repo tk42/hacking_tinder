@@ -108,4 +108,4 @@ hacking_tinder.egg-info
 
 setenv.sh
 
-hacking_tinder/resources/access_token.cfg
+hacking_tinder/resources/access_token.ini

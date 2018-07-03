@@ -23,7 +23,7 @@ setup(
     # https://packaging.python.org/en/latest/development.html#single-sourcing-the-version
     # version='0.0.2',
     # in this module, use Napier's constant
-    version='2.7',
+    version='2.71',
 
     description='Automatically sending likes on tinder',
     long_description=long_description,

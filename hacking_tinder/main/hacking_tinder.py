@@ -100,12 +100,12 @@ def test_utf8():
 if __name__ == '__main__':
     # test_utf8()
     try:
-        with open("../resources/access_token.cfg", "r") as f:
+        with open("./hacking_tinder/resources/access_token.ini", "r") as f:
             facebook_auth_token = f.read()
     except FileNotFoundError as e:
         fb_email, fb_password = sys.argv[1:3]
         facebook_auth_token = AccessToken(fb_email, fb_password).access_token
-        with open("../resources/access_token.cfg", "w") as f:
+        with open("./hacking_tinder/resources/access_token.ini", "w") as f:
             f.write(facebook_auth_token)
     facepp_api_key, facepp_api_secretkey = sys.argv[3:5]
     beauty_score = BeautyScore(facepp_api_key, facepp_api_secretkey)
