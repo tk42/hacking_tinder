@@ -18,7 +18,7 @@ class HackingTinder:
         print("Starting the authentification.")
         self.beauty_score = beauty_score
         self.session = pynder.Session(facebook_token=facebook_auth_token)
-        print("Authentification is succeeded.")
+        print("Authentification is succeeded. Access Token is %s" % facebook_auth_token)
 
         # Checking environments
         print("Checking LANG in environment variables.")
@@ -31,12 +31,21 @@ class HackingTinder:
         # self.session.update_location(LAT, LON)  # updates latitude and longitude for your profile
         # self.session.profile  # your profile. If you update its attributes they will be updated on Tinder.
         self.users = self.session.nearby_users()  # returns a iterable of users nearby
+        if self.users is None:
+            print("Failed to fetch the list of nearby_users.")
+        else:
+            print("Success to fetch the list of nearby_users.")
 
         # Set config
-        self.config = configparser.ConfigParser()
-        self.config.read('./hacking_tinder/resources/config.ini')
-        self.score_threshold = {ethnicity: float(self.config["SCORE_THRESHOLD"][ethnicity])
-                                for ethnicity in self.config["SCORE_THRESHOLD"]}
+        try:
+            self.config = configparser.ConfigParser()
+            self.config.read('./hacking_tinder/resources/config.ini')
+            self.score_threshold = {ethnicity: float(self.config["SCORE_THRESHOLD"][ethnicity])
+                                    for ethnicity in self.config["SCORE_THRESHOLD"]}
+        except Exception as e:
+            print("Failed to read config. details : %s" % str(e))
+            sys.exit(1)
+        print("Success to read config.")
 
     def start(self):
         self.logic()
@@ -50,6 +59,11 @@ class HackingTinder:
     def logic_impl(self):
         try:
             user = self.users.__next__()
+        except Exception as e:
+            print("Failed to get the next user. details:%s" % str(e))
+            return None
+
+        try:
             print("#" + str(self.count) + ": ===================================")
             print("user.name : " + user.name)
             print("user.school : " + str(user.schools))
@@ -83,11 +97,16 @@ class HackingTinder:
 def test_utf8():
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
-
 if __name__ == '__main__':
     # test_utf8()
-    fb_email, fb_password = sys.argv[1:3]
-    facebook_auth_token = AccessToken(fb_email, fb_password).access_token
+    try:
+        with open("../resources/access_token.cfg", "r") as f:
+            facebook_auth_token = f.read()
+    except FileNotFoundError as e:
+        fb_email, fb_password = sys.argv[1:3]
+        facebook_auth_token = AccessToken(fb_email, fb_password).access_token
+        with open("../resources/access_token.cfg", "w") as f:
+            f.write(facebook_auth_token)
     facepp_api_key, facepp_api_secretkey = sys.argv[3:5]
     beauty_score = BeautyScore(facepp_api_key, facepp_api_secretkey)
     ht = HackingTinder(facebook_auth_token, beauty_score)
