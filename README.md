@@ -14,22 +14,13 @@ iPhoneアプリではLikeは右スワイプになるが，これがなかなか�
 
 そこで，自動でLikeを送り続けるようにするスクリプトを開発する
 
-また，Face++のbeauty coreを利用して，[美人スコア](https://www.faceplusplus.com/beauty/)(定義のページが削除されている…)が高い人だけにライクを送る
-
-https://www.faceplusplus.com/beauty/
+また，Face++のbeauty scoreを利用して，[美人スコア](https://www.faceplusplus.com/beauty/)(定義のページが削除されている…)が高い人だけにライクを送る
 
 
 Getting started
 ==========
 
-1. rename setenv.sh.example to setenv.sh and register your facebook token, face api key and face api secret key.
-
-How to get your facebook token? Read 'Get Started' on [Tinderface](https://tinderface.herokuapp.com/), then you can see 'access_token' in the response.
-
-After setting those,
-```
-. ./setenv.sh
-```
+1. register your facebook email, facebook password, face api key and face api secret key, and then rename setenv.sh.example to setenv.sh.
 
 2. install
 ```
@@ -41,7 +32,7 @@ make build
 make run
 ```
 
-4. develop
+4. run tests for developpers
 ```
 make test
 ```
@@ -64,4 +55,4 @@ export LC_ALL='ja_JP.UTF-8'
 
 Future work
 =====
-[Tinderface](https://tinderface.herokuapp.com/)
+Beyond [Tinderface](https://tinderface.herokuapp.com/)
